@@ -196,15 +196,15 @@ app.get('/', async (req, res) => {
                             <div class="episode-title">${episode.title} - ${episode.episode}</div>
                             <div>Tanggal: ${episode.date}</div>
                             <div>Servers: ${episode.servers.length} server available</div>
-                            <a href="/.netlify/functions/server/play?episode=${episode.slug}" class="watch-btn">Watch Now</a>
-                            <a href="/.netlify/functions/server/play?episode=${episode.id}" class="watch-btn">Watch by ID</a>
+                            <a href="/play?episode=${episode.slug}" class="watch-btn">Watch Now</a>
+                            <a href="/play?episode=${episode.id}" class="watch-btn">Watch by ID</a>
                         </div>
                     `).join('')}
                     
                     <div class="pagination">
-                        ${currentPage > 1 ? `<a href="/.netlify/functions/server/?s=${currentPage - 1}" class="page-btn">Previous</a>` : '<span class="page-btn disabled">Previous</span>'}
+                        ${currentPage > 1 ? `<a href="/?s=${currentPage - 1}" class="page-btn">Previous</a>` : '<span class="page-btn disabled">Previous</span>'}
                         <span>Page ${currentPage} of ${totalPages}</span>
-                        ${currentPage < totalPages ? `<a href="/.netlify/functions/server/?s=${currentPage + 1}" class="page-btn">Next</a>` : '<span class="page-btn disabled">Next</span>'}
+                        ${currentPage < totalPages ? `<a href="/?s=${currentPage + 1}" class="page-btn">Next</a>` : '<span class="page-btn disabled">Next</span>'}
                     </div>
                 </div>
             </body>
@@ -666,11 +666,11 @@ app.get('/play', async (req, res) => {
                         
                         // Navigasi video
                         prevBtn.addEventListener('click', function() {
-                            ${prevEpisode ? `window.location.href = '/.netlify/functions/server/play?episode=${prevEpisode.slug}';` : ''}
+                            ${prevEpisode ? `window.location.href = '/play?episode=${prevEpisode.slug}';` : ''}
                         });
                         
                         nextBtn.addEventListener('click', function() {
-                            ${nextEpisode ? `window.location.href = '/.netlify/functions/server/play?episode=${nextEpisode.slug}';` : ''}
+                            ${nextEpisode ? `window.location.href = '/play?episode=${nextEpisode.slug}';` : ''}
                         });
                         
                         // Kontrol visibilitas tombol navigasi
@@ -705,9 +705,9 @@ app.get('/play', async (req, res) => {
                         // Navigasi dengan keyboard
                         document.addEventListener('keydown', function(e) {
                             if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
-                                ${prevEpisode ? `window.location.href = '/.netlify/functions/server/play?episode=${prevEpisode.slug}';` : ''}
+                                ${prevEpisode ? `window.location.href = '/play?episode=${prevEpisode.slug}';` : ''}
                             } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
-                                ${nextEpisode ? `window.location.href = '/.netlify/functions/server/play?episode=${nextEpisode.slug}';` : ''}
+                                ${nextEpisode ? `window.location.href = '/play?episode=${nextEpisode.slug}';` : ''}
                             }
                         });
                         
